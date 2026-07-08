@@ -1,33 +1,33 @@
 import streamlit as st
+import random # นำเข้า library สำหรับสุ่มตัวเลขในเกม
 
 # 1. ตั้งค่าหน้าเว็บให้ดูกว้างขึ้นและมีไอคอน
-st.set_page_config(page_title="Portfolio | PEEMPOT GUAKUL", page_icon="", layout="wide")
+st.set_page_config(page_title="Portfolio | PEEMPOT GUAKUL", page_icon="💻", layout="wide")
 
 # --- ส่วนหัว (Header) ---
 col1, col2 = st.columns([1, 2.5])
 with col1:
-    # เปลี่ยน URL ด้านล่างเป็นลิงก์รูปโปรไฟล์ของคุณได้เลย
     st.image("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", width=220) 
 with col2:
-    st.title("Peempot guakul(Fluke)")
-    st.subheader("Full Stack Developer & Game designer 💻")
+    st.title("Peempot guakul (Fluke)")
+    st.subheader("Full Stack Developer & Game Designer 💻")
     st.write("""
     ผสมผสานทักษะงานบริหารเข้ากับความหลงใหลในเทคโนโลยีและการพัฒนาซอฟต์แวร์ 
     มีประสบการณ์ทั้งการจัดการระบบหลังบ้าน การพัฒนา Web Application และการสร้างระบบอัตโนมัติเพื่อลดขั้นตอนการทำงาน
     """)
 
-st.divider() # เส้นคั่นแบบสวยงาม
+st.divider()
 
-# --- ใช้ Tabs เพื่อแบ่งหน้าเนื้อหาให้ดูไม่รกตา ---
-tab1, tab2, tab3 = st.tabs(["💼 ประสบการณ์ & การศึกษา", "🚀 โปรเจกต์ & ทักษะ", "📫 ติดต่องาน"])
+# --- ใช้ Tabs แบ่งหน้าเนื้อหา (เพิ่มแท็บมินิเกม) ---
+tab1, tab2, tab3, tab4 = st.tabs(["💼 ประสบการณ์ & การศึกษา", "🚀 โปรเจกต์ & ทักษะ", "🎮 มินิเกม", "📫 ติดต่องาน"])
 
 # --- แท็บที่ 1: ประวัติ ---
 with tab1:
     st.markdown("### 💼 ประสบการณ์ทำงาน")
-    st.write("• **2022 - ปัจจุบัน:** Software Developer, Front End ")
-    st.write("•ผู้สอน และออกแบบสื่อการเรียนการสอนเขียนโปรแกรมพื้นฐาน (Roblox Studio / Lua),Scratch,Thunkable,Blockly,C#,C++,Python ")
+    st.write("• **2022 - ปัจจุบัน:** Software Developer, Front End")
+    st.write("• ผู้สอน และออกแบบสื่อการเรียนการสอนเขียนโปรแกรมพื้นฐาน (Roblox Studio / Lua), Scratch, Thunkable, Blockly, C#, C++, Python")
     
-    st.markdown("<br>", unsafe_allow_html=True) # เว้นบรรทัด
+    st.markdown("<br>", unsafe_allow_html=True)
     
     st.markdown("### 🎓 การศึกษา")
     st.write("• **2016 - 2020:** Computer Engineering, Dhurakij Pundit University (DPU)")
@@ -40,28 +40,91 @@ with tab2:
 
     st.markdown("### 🌟 ผลงานเด่น (Projects)")
     
-    # ใช้คอลัมน์และกรอบเพื่อทำเป็นการ์ดโชว์ผลงาน
     col_p1, col_p2 = st.columns(2)
     with col_p1:
         with st.container(border=True):
             st.markdown("#### 💰 WealthFlow Web App")
             st.write("พัฒนาเว็บไซต์สำหรับบันทึกรายรับ-รายจ่าย และติดตามพอร์ตการลงทุนส่วนตัว โดยใช้ React และเชื่อมต่อฐานข้อมูลด้วย Firebase เพื่อการจัดการการเงินอย่างเป็นระบบ")
-    
     with col_p2:
         with st.container(border=True):
             st.markdown("#### 🤖 Data Automation System")
             st.write("สร้างระบบประมวลผลข้อมูลอัตโนมัติด้วย n8n (ตั้งค่า MQTT nodes) ร่วมกับ Scratch เพื่อดึงและบันทึกข้อมูลทางการเงินลงใน Google Sheets อัตโนมัติ")
+            
+    # เพิ่มโปรเจกต์ใหม่ที่นี่
+    col_p3, col_p4 = st.columns(2)
+    with col_p3:
+        with st.container(border=True):
+            st.markdown("#### ✈️ Travel Diary Web App")
+            st.write("เว็บแอปพลิเคชันสำหรับบันทึกเรื่องราวและไดอารี่การท่องเที่ยว พัฒนาด้วย React ช่วยให้เก็บความทรงจำ สถานที่ และรูปภาพได้อย่างเป็นระเบียบ")
+    with col_p4:
+        with st.container(border=True):
+            st.markdown("#### 🌳 Family Tree Web App")
+            st.write("เว็บแอปพลิเคชันสร้างและแสดงแผนผังครอบครัว พัฒนาด้วย React เพื่อจัดการความสัมพันธ์และประวัติข้อมูลของสมาชิกในครอบครัวได้อย่างง่ายดายและสวยงาม")
 
-# --- แท็บที่ 3: ช่องทางการติดต่อ ---
+# --- แท็บที่ 3: มินิเกม (Mini Games) ---
 with tab3:
-    st.markdown("### 📫 ช่องทางการติดต่องาน")
-    st.write("ยินดีรับโอกาสใหม่ๆ และการร่วมงานในโปรเจกต์ที่น่าสนใจ สามารถติดต่อพูดคุยกันได้ตามช่องทางด้านล่างนี้เลยครับ/ค่ะ:")
+    st.markdown("### 🎮 มินิเกม Python สำหรับคลายเครียด")
+    st.write("ทดลองเล่นมินิเกมที่เขียนขึ้นด้วยภาษา Python และทำงานบน Streamlit ได้เลยครับ!")
     
-    # ใช้กล่องข้อความสีฟ้าเน้นอีเมล
-    st.info("**📧 Email:** som.asayawinee@example.com") 
+    game_col1, game_col2 = st.columns(2)
+    
+    # เกมที่ 1: เป่ายิ้งฉุบ
+    with game_col1:
+        with st.container(border=True):
+            st.markdown("#### ✌️✊✋ เกมเป่ายิ้งฉุบ")
+            choices = ["ค้อน ✊", "กรรไกร ✌️", "กระดาษ ✋"]
+            user_choice = st.radio("เลือกอาวุธของคุณ:", choices, horizontal=True)
+            
+            if st.button("เป่ายิ้งฉุบ!"):
+                bot_choice = random.choice(choices)
+                st.write(f"🤖 บอทเลือก: **{bot_choice}**")
+                
+                if user_choice == bot_choice:
+                    st.info("เสมอ! ใจตรงกันเลย 😲")
+                elif (user_choice == "ค้อน ✊" and bot_choice == "กรรไกร ✌️") or \
+                     (user_choice == "กรรไกร ✌️" and bot_choice == "กระดาษ ✋") or \
+                     (user_choice == "กระดาษ ✋" and bot_choice == "ค้อน ✊"):
+                    st.success("คุณชนะ! 🎉")
+                else:
+                    st.error("คุณแพ้! ลองใหม่นะ 😭")
+
+    # เกมที่ 2: ทายตัวเลข
+    with game_col2:
+        with st.container(border=True):
+            st.markdown("#### 🔢 เกมทายใจตัวเลข (1-50)")
+            
+            # ใช้ session_state เพื่อเก็บค่าตัวเลขเป้าหมายไม่ให้เปลี่ยนทุกครั้งที่กดปุ่ม
+            if 'target_num' not in st.session_state:
+                st.session_state.target_num = random.randint(1, 50)
+                st.session_state.attempts = 0
+
+            guess = st.number_input("ใส่ตัวเลขที่ทาย:", min_value=1, max_value=50, step=1)
+            
+            col_btn1, col_btn2 = st.columns([1, 1])
+            with col_btn1:
+                if st.button("ทายตัวเลข!"):
+                    st.session_state.attempts += 1
+                    if guess < st.session_state.target_num:
+                        st.warning(f"ครั้งที่ {st.session_state.attempts}: น้อยไปครับ! 🔼")
+                    elif guess > st.session_state.target_num:
+                        st.warning(f"ครั้งที่ {st.session_state.attempts}: มากไปครับ! 🔽")
+                    else:
+                        st.success(f"🎉 ถูกต้อง! คำตอบคือ {st.session_state.target_num} (คุณทายไป {st.session_state.attempts} ครั้ง)")
+                        st.balloons() # เอฟเฟกต์ลูกโป่งตอนชนะ
+            with col_btn2:
+                if st.button("เริ่มเกมใหม่ 🔄"):
+                    st.session_state.target_num = random.randint(1, 50)
+                    st.session_state.attempts = 0
+                    st.info("รีเซ็ตเกมเรียบร้อย! เริ่มทายใหม่ได้เลย")
+
+# --- แท็บที่ 4: ช่องทางการติดต่อ ---
+with tab4:
+    st.markdown("### 📫 ช่องทางการติดต่องาน")
+    st.write("ยินดีรับโอกาสใหม่ๆ และการร่วมงานในโปรเจกต์ที่น่าสนใจ สามารถติดต่อพูดคุยกันได้ตามช่องทางด้านล่างนี้เลยครับ")
+    
+    st.info("**📧 Email:** Yokinezz1997@gmail.com") 
     st.write("")
     
-    # สร้างปุ่มกดที่ลิงก์ไปยังโซเชียลต่างๆ
     c1, c2, c3 = st.columns(3)
     with c1:
         st.link_button("💼 LinkedIn Profile", "https://linkedin.com", use_container_width=True)
@@ -71,4 +134,5 @@ with tab3:
         st.link_button("📷 Portfolio ผลงานถ่ายภาพ", "https://instagram.com", use_container_width=True)
 
 st.write("---")
-st.caption("© 2026 Asayawinee B. | Built with ❤️ using Streamlit")
+# แก้ไขเครดิตด้านล่างให้ตรงกับชื่อของคุณ
+st.caption("© 2026 Peempot Guakul | Built with ❤️ using Streamlit & Python")
