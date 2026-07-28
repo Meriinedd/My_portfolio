@@ -2,7 +2,7 @@ import streamlit as st
 import random # นำเข้า library สำหรับสุ่มตัวเลขในเกม
 
 # 1. ตั้งค่าหน้าเว็บให้ดูกว้างขึ้นและมีไอคอน
-st.set_page_config(page_title="PortfolioXOXOXOXO | PEEMPOT GUAKUL", page_icon="💻", layout="wide")
+st.set_page_config(page_title="Portfolio | PEEMPOT GUAKUL", page_icon="💻", layout="wide")
 
 # --- ส่วนหัว (Header) ---
 col1, col2 = st.columns([1, 2.5])
