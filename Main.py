@@ -24,8 +24,8 @@ tab1, tab2, tab3, tab4 = st.tabs(["💼 ประสบการณ์ & กา�
 # --- แท็บที่ 1: ประวัติ ---
 with tab1:
     st.markdown("### 💼 ประสบการณ์ทำงาน")
-    st.write("• **2022 - ปัจจุบัน:** Software Developer, Front End")
-    st.write("• ผู้สอน และออกแบบสื่อการเรียนการสอนเขียนโปรแกรมพื้นฐาน (Roblox Studio / Lua), Scratch, Thunkable, Blockly, C#, C++, Python")
+    st.write("- **2022 : ปัจจุบัน:** Software Developer, Front End")
+    st.write("- ผู้สอน และออกแบบสื่อการเรียนการสอนเขียนโปรแกรมพื้นฐาน (Roblox Studio / Lua), Scratch, Thunkable, Blockly, C#, C++, Python")
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -77,6 +77,7 @@ with tab3:
             
             if st.button("เป่ายิ้งฉุบ!"):
                 bot_choice = random.choice(choices)
+                
                 st.write(f"🤖 บอทเลือก: **{bot_choice}**")
                 
                 if user_choice == bot_choice:
