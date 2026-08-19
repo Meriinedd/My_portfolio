@@ -1,13 +1,30 @@
 import streamlit as st
-import random # นำเข้า library สำหรับสุ่มตัวเลขในเกม
+import random 
+import requests
+from streamlit_option_menu import option_menu # ไลบรารีสำหรับทำเมนูสวยๆ
+from streamlit_lottie import st_lottie # ไลบรารีสำหรับแอนิเมชัน
+
+# --- ฟังก์ชันสำหรับโหลดแอนิเมชัน Lottie ---
+def load_lottieurl(url):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
 
 # 1. ตั้งค่าหน้าเว็บให้ดูกว้างขึ้นและมีไอคอน
 st.set_page_config(page_title="Portfolio | PEEMPOT GUAKUL", page_icon="💻", layout="wide")
 
+# โหลดแอนิเมชัน (คุณสามารถเปลี่ยน URL เป็นแอนิเมชันอื่นจาก lottiefiles.com ได้)
+lottie_coding = load_lottieurl("https://lottie.host/8061df43-1698-4c91-a185-181514736f1c/J77626tI7y.json")
+
 # --- ส่วนหัว (Header) ---
 col1, col2 = st.columns([1, 2.5])
 with col1:
-    st.image("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", width=220) 
+    if lottie_coding:
+        # ใช้แอนิเมชันเคลื่อนไหวแทนภาพนิ่ง
+        st_lottie(lottie_coding, height=220, key="coding")
+    else:
+        st.image("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", width=220) 
 with col2:
     st.title("Peempot guakul (Fluke)")
     st.subheader("Full Stack Developer & Game Designer 💻")
@@ -16,13 +33,26 @@ with col2:
     มีประสบการณ์ทั้งการจัดการระบบหลังบ้าน การพัฒนา Web Application และการสร้างระบบอัตโนมัติเพื่อลดขั้นตอนการทำงาน
     """)
 
-st.divider()
+st.write("---")
 
-# --- ใช้ Tabs แบ่งหน้าเนื้อหา (เพิ่มแท็บมินิเกม) ---
-tab1, tab2, tab3, tab4 = st.tabs(["💼 ประสบการณ์ & การศึกษา", "🚀 โปรเจกต์ & ทักษะ", "🎮 มินิเกม", "📫 ติดต่องาน"])
+# --- ใช้ Option Menu แบบแนวนอนแทน Tabs แบบเดิม ---
+selected = option_menu(
+    menu_title=None,  # ไม่ต้องแสดงชื่อเมนูหลัก
+    options=["ประสบการณ์ & การศึกษา", "โปรเจกต์ & ทักษะ", "มินิเกม", "ติดต่องาน"], # ชื่อเมนู
+    icons=["briefcase", "rocket", "controller", "envelope"], # ไอคอนจาก Bootstrap Icons
+    menu_icon="cast", 
+    default_index=0, 
+    orientation="horizontal",
+    styles={
+        "container": {"padding": "0!important", "background-color": "transparent"},
+        "icon": {"color": "#ffaa00", "font-size": "20px"}, 
+        "nav-link": {"font-size": "16px", "text-align": "center", "margin": "0px", "--hover-color": "#333333"},
+        "nav-link-selected": {"background-color": "#e63946"}, # สีตอนกดเลือกเมนู
+    }
+)
 
-# --- แท็บที่ 1: ประวัติ ---
-with tab1:
+# --- ส่วนที่ 1: ประวัติ ---
+if selected == "ประสบการณ์ & การศึกษา":
     st.markdown("### 💼 ประสบการณ์ทำงาน")
     st.write("- **2022 : ปัจจุบัน:** Software Developer, Front End")
     st.write("- ผู้สอน และออกแบบสื่อการเรียนการสอนเขียนโปรแกรมพื้นฐาน (Roblox Studio / Lua), Scratch, Thunkable, Blockly, C#, C++, Python")
@@ -32,11 +62,12 @@ with tab1:
     st.markdown("### 🎓 การศึกษา")
     st.write("• **2016 - 2020:** Computer Engineering, Dhurakij Pundit University (DPU)")
 
-# --- แท็บที่ 2: โปรเจกต์และทักษะ ---
-with tab2:
+# --- ส่วนที่ 2: โปรเจกต์และทักษะ ---
+if selected == "โปรเจกต์ & ทักษะ":
     st.markdown("### 🛠️ ทักษะ (Skills)")
-    st.write("**Programming & Tech:** Python, React, Firebase, Vercel, n8n, Scratch")
-    st.write("**Interests:** Web Development, Data Automation, Photography (Canon EOS R50)")
+    # ใช้กล่องข้อความสีๆ เพื่อเน้นทักษะให้ดูโดดเด่นขึ้น
+    st.info("**Programming & Tech:** Python, React, Firebase, Vercel, n8n, Scratch")
+    st.success("**Interests:** Web Development, Data Automation, Photography (Canon EOS R50)")
 
     st.markdown("### 🌟 ผลงานเด่น (Projects)")
     
@@ -50,7 +81,6 @@ with tab2:
             st.markdown("#### 🤖 Data Automation System")
             st.write("สร้างระบบประมวลผลข้อมูลอัตโนมัติด้วย n8n (ตั้งค่า MQTT nodes) ร่วมกับ Scratch เพื่อดึงและบันทึกข้อมูลทางการเงินลงใน Google Sheets อัตโนมัติ")
             
-    # เพิ่มโปรเจกต์ใหม่ที่นี่
     col_p3, col_p4 = st.columns(2)
     with col_p3:
         with st.container(border=True):
@@ -61,8 +91,8 @@ with tab2:
             st.markdown("#### 🌳 Family Tree Web App")
             st.write("เว็บแอปพลิเคชันสร้างและแสดงแผนผังครอบครัว พัฒนาด้วย React เพื่อจัดการความสัมพันธ์และประวัติข้อมูลของสมาชิกในครอบครัวได้อย่างง่ายดายและสวยงาม")
 
-# --- แท็บที่ 3: มินิเกม (Mini Games) ---
-with tab3:
+# --- ส่วนที่ 3: มินิเกม (Mini Games) ---
+if selected == "มินิเกม":
     st.markdown("### 🎮 มินิเกม Python สำหรับคลายเครียด")
     st.write("ทดลองเล่นมินิเกมที่เขียนขึ้นด้วยภาษา Python และทำงานบน Streamlit ได้เลยครับ!")
     
@@ -94,7 +124,6 @@ with tab3:
         with st.container(border=True):
             st.markdown("#### 🔢 เกมทายใจตัวเลข (1-50)")
             
-            # ใช้ session_state เพื่อเก็บค่าตัวเลขเป้าหมายไม่ให้เปลี่ยนทุกครั้งที่กดปุ่ม
             if 'target_num' not in st.session_state:
                 st.session_state.target_num = random.randint(1, 50)
                 st.session_state.attempts = 0
@@ -111,15 +140,15 @@ with tab3:
                         st.warning(f"ครั้งที่ {st.session_state.attempts}: มากไปครับ! 🔽")
                     else:
                         st.success(f"🎉 ถูกต้อง! คำตอบคือ {st.session_state.target_num} (คุณทายไป {st.session_state.attempts} ครั้ง)")
-                        st.balloons() # เอฟเฟกต์ลูกโป่งตอนชนะ
+                        st.balloons() 
             with col_btn2:
                 if st.button("เริ่มเกมใหม่ 🔄"):
                     st.session_state.target_num = random.randint(1, 50)
                     st.session_state.attempts = 0
                     st.info("รีเซ็ตเกมเรียบร้อย! เริ่มทายใหม่ได้เลย")
 
-# --- แท็บที่ 4: ช่องทางการติดต่อ ---
-with tab4:
+# --- ส่วนที่ 4: ช่องทางการติดต่อ ---
+if selected == "ติดต่องาน":
     st.markdown("### 📫 ช่องทางการติดต่องาน")
     st.write("ยินดีรับโอกาสใหม่ๆ และการร่วมงานในโปรเจกต์ที่น่าสนใจ สามารถติดต่อพูดคุยกันได้ตามช่องทางด้านล่างนี้เลยครับ")
     
@@ -135,5 +164,4 @@ with tab4:
         st.link_button("📷 Portfolio ผลงานถ่ายภาพ", "https://instagram.com", use_container_width=True)
 
 st.write("---")
-# แก้ไขเครดิตด้านล่างให้ตรงกับชื่อของคุณ
 st.caption("© 2026 Peempot Guakul | Built with ❤️ using Streamlit & Python")
